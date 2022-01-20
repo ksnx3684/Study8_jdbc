@@ -16,6 +16,45 @@ public class DepartmentDAO {
 		dbConnector = new DBConnector(); // 객체 생성
 	}
 	
+	
+	
+	// 부서번호로 조회
+	public DepartmentDTO getOne(DepartmentDTO dep) throws Exception{
+		DepartmentDTO departmentDTO = null;
+		// 1. DB 로그인
+		Connection con = dbConnector.getConnect();
+		// 2. SQL Query문 작성
+		String sql = "SELECT * FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?";
+		// 3. 작성한 Query문을 미리 전송해서 DB가 준비
+		PreparedStatement st = con.prepareStatement(sql);
+		// 4. ?의 값을 세팅, 없으면 통과
+		// st.set데이터타입(int index, 값); // index는 ?의 순서번호
+		// 그러나 oracle은 1번부터 시작......
+		st.setInt(1, dep.getDepartment_id());
+		
+		// 5. 최종 전송 후 결과 처리
+		ResultSet rs = st.executeQuery();
+		// row가 있거나 없거나
+		if(rs.next()) {
+			departmentDTO = new DepartmentDTO();
+			departmentDTO.setDepartment_id(rs.getInt("department_id")); // 컬럼의 인덱스 번호를 넣어도 된다
+			departmentDTO.setDepartment_name(rs.getString("department_name"));
+			//departmentDTO.setDepartment_name(rs.getString("dname")); // 별칭을 사용할 경우 불러올 때도 별칭의 이름을 넣는다
+			departmentDTO.setManager_id(rs.getInt("manager_id")); // 컬럼명은 DB상에서 조회된 컬럼명을 기준으로 넣는다.
+			departmentDTO.setLocation_id(rs.getInt("location_id"));
+		}
+		
+		// 6. 외부 연결 자원 해제
+		rs.close();
+		st.close();
+		con.close();
+		
+		return departmentDTO;
+	}
+	
+	
+	
+	// 전체 조회
 	public List<DepartmentDTO> getList() throws Exception {
 		ArrayList<DepartmentDTO> ar = new ArrayList<>(); // DepartmentDTO타입의 데이터를 담을 어레이리스트 객체 생성
 		
