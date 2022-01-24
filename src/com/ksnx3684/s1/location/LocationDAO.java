@@ -15,7 +15,36 @@ public class LocationDAO {
 		dbconnector = new DBConnector();
 	}
 
+	public LocationDTO getOne(LocationDTO loc) throws Exception {
+		// 부분 검색
+		LocationDTO locationDTO = null;
+		Connection con = dbconnector.getConnect();
+		
+		String sql = "SELECT * FROM LOCATIONS WHERE LOCATION_ID = ?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, loc.getLocation_id());
+		
+		ResultSet rs = st.executeQuery();
+		
+		if(rs.next()) {
+			locationDTO = new LocationDTO();
+			locationDTO.setLocation_id(rs.getInt("location_id"));
+			locationDTO.setStreet_address(rs.getString("street_address"));
+			locationDTO.setPostal_code(rs.getString("postal_code"));
+			locationDTO.setCity(rs.getString("city"));
+			locationDTO.setState_province(rs.getNString("state_province"));
+			locationDTO.setCountry_id(rs.getString("country_id"));
+		}
+		rs.close();
+		st.close();
+		con.close();
+		
+		return locationDTO;
+	}
 	public List<LocationDTO> getList() throws Exception {
+		// 전체 검색
 		// 1. DB에 로그인
 		// 2. SQL Query문 작성
 		// 3. Query문 미리 전송

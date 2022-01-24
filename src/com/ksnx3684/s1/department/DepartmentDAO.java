@@ -16,7 +16,20 @@ public class DepartmentDAO {
 		dbConnector = new DBConnector(); // 객체 생성
 	}
 	
-	
+	// 부서정보, 부서에 근무하는 사원들의 정보
+	public void getDEP_EMPList() throws Exception {
+		Connection con = dbConnector.getConnect();
+		String sql = "SELECT D.*, E.* "
+				+ "FROM DEPARTMENTS D "
+				+ "    INNER JOIN "
+				+ "    EMPLOYEES E "
+				+ "    ON (D.DEPARTMENT_ID = E.DEPARTMENT_ID) ";
+		PreparedStatement st = con.prepareStatement(sql);
+		ResultSet rs = st.executeQuery();
+		while(rs.next()) {
+			
+		}
+	}
 	
 	// 부서번호로 조회
 	public DepartmentDTO getOne(DepartmentDTO dep) throws Exception{

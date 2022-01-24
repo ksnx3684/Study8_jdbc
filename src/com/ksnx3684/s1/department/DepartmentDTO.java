@@ -1,5 +1,9 @@
 package com.ksnx3684.s1.department;
 
+import java.util.List;
+
+import com.ksnx3684.s1.employee.EmployeeDTO;
+
 public class DepartmentDTO {
 
 	// DB의 table의 해당 컬럼명과 데이터타입과 동일하게 생성 (대소문자 구분 X)
@@ -7,6 +11,8 @@ public class DepartmentDTO {
 	private String department_name;
 	private Integer manager_id;
 	private Integer location_id;
+	// EmployeeDTO 멤버변수가 있어야 함
+	private List<EmployeeDTO> employeeDTOs;
 	
 	public Integer getDepartment_id() {
 		return department_id;

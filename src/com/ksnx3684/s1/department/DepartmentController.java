@@ -21,7 +21,7 @@ public class DepartmentController {
 		while(flag) {
 			System.out.println("1. 부서 리스트 출력");
 			System.out.println("2. 부서 번호 검색");
-			System.out.println("3. 프로그램 종료");
+			System.out.println("3. 메인 메뉴로 가기");
 			int select = sc.nextInt();
 			
 			switch(select) {
@@ -34,13 +34,10 @@ public class DepartmentController {
 				DepartmentDTO departmentDTO = new DepartmentDTO();
 				departmentDTO.setDepartment_id(sc.nextInt());
 				departmentDTO = departmentDAO.getOne(departmentDTO);
-				if(departmentDTO != null) {
-					System.out.println(departmentDTO.getDepartment_name());
-					//DepartmentView departmentView = new DepartmentView();
-				}
-				else {
+				if(departmentDTO != null)
+					departmentView.view(departmentDTO);
+				else
 					System.out.println("없는 번호입니다");
-				}
 				break;
 			default :
 				flag = false;
