@@ -16,6 +16,49 @@ public class DepartmentDAO {
 		dbConnector = new DBConnector(); // 객체 생성
 	}
 	
+	// INSERT, DELETE 기능 추가
+	public int setDelete(DepartmentDTO departmentDTO) throws Exception {
+		int result = 0;
+		
+		Connection con = dbConnector.getConnect();
+		
+		String sql = "DELETE DEPARTMENTS WHERE DEPARTMENT_ID = ?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setInt(1, departmentDTO.getDepartment_id());
+		
+		result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	public int setInsert(DepartmentDTO departmentDTO) throws Exception {
+		int result = 0;
+		
+		Connection con = dbConnector.getConnect();
+		
+		String sql = "INSERT INTO DEPARTMENTS (DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)"
+				+ "VALUES (DEPARTMENTS_SEQ.NEXTVAL, '?', ?, ?)";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, departmentDTO.getDepartment_name());
+		st.setInt(2, departmentDTO.getManager_id());
+		st.setInt(3, departmentDTO.getLocation_id());
+		
+		result = st.executeUpdate();
+		
+		st.close();
+		con.close();
+		
+		return result;
+	}
+	
+	
 	// 부서정보, 부서에 근무하는 사원들의 정보
 	public void getDEP_EMPList() throws Exception {
 		Connection con = dbConnector.getConnect();

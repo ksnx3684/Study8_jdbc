@@ -4,6 +4,12 @@ import java.util.List;
 
 public class DepartmentView {
 	
+	public void view(String message) {
+		System.out.println("--------------------");
+		System.out.println("Message : " + message);
+		System.out.println("--------------------");
+	}
+	
 	public void view(DepartmentDTO departmentDTO) {
 		System.out.print(departmentDTO.getDepartment_id()+"\t");
 		System.out.print(departmentDTO.getDepartment_name()+"\t");

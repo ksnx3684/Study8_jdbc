@@ -1,5 +1,8 @@
 package com.ksnx3684.s1.start;
 
+//import com.ksnx3684.s1.region.RegionController;
+//import com.ksnx3684.s1.region.RegionDAO;
+//import com.ksnx3684.s1.region.RegionDTO;
 //import java.util.List;
 //import com.ksnx3684.s1.department.DepartmentController;
 //import com.ksnx3684.s1.department.DepartmentDAO;
@@ -18,6 +21,23 @@ public class StartMain {
 		
 		try {
 			frontController.mainStart();
+			
+			
+			
+//			---------------------------------------------------
+//			RegionDAO regionDAO = new RegionDAO();
+//			RegionDTO regionDTO = new RegionDTO();
+//			regionDTO.setRegion_id(6L); // 추가, 삭제, 수정 구문
+//			regionDTO.setRegion_name("South Pole"); // 추가, 수정 구문
+//			int result = regionDAO.setInsert(regionDTO); // 추가 구문
+//			int result = regionDAO.setDelete(regionDTO); // 삭제 구문
+//			int result = regionDAO.setUpdate(regionDTO); // 수정 구문
+			
+//			if(result > 0)
+//				System.out.println("성공");
+//			else
+//				System.out.println("실패");
+//			---------------------------------------------------	
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
