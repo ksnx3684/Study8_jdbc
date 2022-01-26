@@ -17,6 +17,7 @@ public class DepartmentDAO {
 	}
 	
 	// INSERT, DELETE 기능 추가
+	// 부서 정보 삭제
 	public int setDelete(DepartmentDTO departmentDTO) throws Exception {
 		int result = 0;
 		
@@ -35,20 +36,23 @@ public class DepartmentDAO {
 		
 		return result;
 	}
-	
+	// 부서 정보 추가
 	public int setInsert(DepartmentDTO departmentDTO) throws Exception {
 		int result = 0;
 		
 		Connection con = dbConnector.getConnect();
 		
+//		String sql = "INSERT INTO DEPARTMENTS (DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)"
+//				+ "VALUES (DEPARTMENTS_SEQ.NEXTVAL, ?, ?, ?)";
 		String sql = "INSERT INTO DEPARTMENTS (DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)"
-				+ "VALUES (DEPARTMENTS_SEQ.NEXTVAL, '?', ?, ?)";
+				+ "VALUES (?, ?, ?, ?)"; // String 들어갈 부분에 '' 쓰지 않도록 주의한다. 쓰면 계속 부적합한 인덱스라고 뜬다.
 		
 		PreparedStatement st = con.prepareStatement(sql);
 		
-		st.setString(1, departmentDTO.getDepartment_name());
-		st.setInt(2, departmentDTO.getManager_id());
-		st.setInt(3, departmentDTO.getLocation_id());
+		st.setInt(1, departmentDTO.getDepartment_id());
+		st.setString(2, departmentDTO.getDepartment_name());
+		st.setInt(3, departmentDTO.getManager_id());
+		st.setInt(4, departmentDTO.getLocation_id());
 		
 		result = st.executeUpdate();
 		

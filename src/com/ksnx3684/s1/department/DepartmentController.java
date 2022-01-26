@@ -50,7 +50,7 @@ public class DepartmentController {
 				DepartmentDTO departmentDTO2 = departmentInput.setInsert();
 				result = departmentDAO.setInsert(departmentDTO2);
 				message = "Insert Fail";
-				if(result != 0)
+				if(result > 0)
 					message = "Insert Success";
 				departmentView.view(message);
 				break;
@@ -58,7 +58,7 @@ public class DepartmentController {
 				DepartmentDTO departmentDTO3 = departmentInput.setDelete();
 				result = departmentDAO.setDelete(departmentDTO3);
 				message = "Delete Fail";
-				if(result != 0)
+				if(result > 0)
 					message = "Delete Success";
 				departmentView.view(message);
 				break;

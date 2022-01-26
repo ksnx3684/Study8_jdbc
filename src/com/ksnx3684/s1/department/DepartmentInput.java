@@ -20,6 +20,8 @@ public class DepartmentInput {
 	
 	public DepartmentDTO setInsert() {
 		DepartmentDTO departmentDTO = new DepartmentDTO();
+		System.out.println("추가할 부서의 ID를 입력하시오");
+		departmentDTO.setDepartment_id(sc.nextInt());
 		System.out.println("추가할 부서의 Name을 입력하시오");
 		departmentDTO.setDepartment_name(sc.next());
 		System.out.println("추가할 부서의 Manager ID를 입력하시오");
