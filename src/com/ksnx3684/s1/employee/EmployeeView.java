@@ -22,7 +22,6 @@ public class EmployeeView {
 	public void view(List<EmployeeDTO> ar) {
 		for(int i = 0; i < ar.size(); i++) {
 			this.view(ar.get(i));
-			System.out.println("------------------------------------------------------------------------------");
 		}
 	}
 

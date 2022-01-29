@@ -17,7 +17,6 @@ public class LocationView {
 	public void view(List<LocationDTO> ar) {
 		for(int i = 0; i < ar.size(); i++) {
 			this.view(ar.get(i));
-			System.out.println("-------------------------------------------------------------------------------------");
 		}
 	}
 	

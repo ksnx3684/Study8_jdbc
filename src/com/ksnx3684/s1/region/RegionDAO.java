@@ -1,6 +1,10 @@
 package com.ksnx3684.s1.region;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ksnx3684.s1.util.DBConnector;
 
 public class RegionDAO {
@@ -9,6 +13,51 @@ public class RegionDAO {
 	
 	public RegionDAO() {
 		dbConnector = new DBConnector();	
+	}
+	// 전체 조회
+	public List<RegionDTO> getList() throws Exception {
+		ArrayList<RegionDTO> ar = new ArrayList<>();
+		
+		Connection con = dbConnector.getConnect();
+		
+		String sql = "SELECT * FROM REGIONS";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next()) {
+			RegionDTO regionDTO = new RegionDTO();
+			regionDTO.setRegion_id(rs.getLong("region_id"));
+			regionDTO.setRegion_name(rs.getString("region_name"));
+			ar.add(regionDTO);
+		}
+		return ar;
+	}
+	// 검색 후 조회
+	public RegionDTO getOne(RegionDTO reg) throws Exception {
+		RegionDTO regionDTO = null;
+		Connection con = dbConnector.getConnect();
+		
+		String sql = "SELECT * FROM REGIONS WHERE REGION_ID = ?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setLong(1, reg.getRegion_id());
+		
+		ResultSet rs = st.executeQuery();
+		
+		if(rs.next()) {
+			regionDTO = new RegionDTO();
+			regionDTO.setRegion_id(rs.getLong("region_id"));
+			regionDTO.setRegion_name(rs.getString("region_name"));
+		}
+		
+		rs.close();
+		st.close();
+		con.close();
+		
+		return regionDTO;
 	}
 	
 	// 대륙 정보 수정

@@ -22,7 +22,6 @@ public class DepartmentView {
 		// 모두 출력
 		for(int i = 0; i < ar.size(); i++) {
 			this.view(ar.get(i));
-			System.out.println("--------------------------------------------------");
 		}
 	}
 	
